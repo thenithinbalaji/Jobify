@@ -1,0 +1,7 @@
+# project settings
+venv
+.vscode
+__pycache__
+
+#secrets
+.env

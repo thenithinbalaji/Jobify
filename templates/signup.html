@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobify</title>
+
+    <link rel="icon" type="image/png" href="static\assets\nbyula_logo.svg">
+    <script src="https://cdn.tailwindcss.com/?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <nav class="flex py-5 px-10 justify-between">
+        <div class="flex gap-10">
+            <a href="/">
+                <img src="{{ url_for('static', filename='assets/name_logo.png') }}" alt="Nbyula Logo" class="w-28">
+            </a>
+
+            <div class="md:flex gap-5 hidden">
+                <a href="https://nbyula.com/"
+                    class="my-auto font-semibold hover:bg-slate-100 h-full flex flex-col justify-center px-4 rounded-md"
+                    target="_blank" rel="noopener">Main
+                    Website</a>
+                <a href="https://nbyula.com/about-us"
+                    class="my-auto font-semibold hover:bg-slate-100 h-full flex flex-col justify-center px-4 rounded-md"
+                    target="_blank" rel="noopener">About
+                    Us</a>
+            </div>
+
+        </div>
+
+    </nav>
+
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="{{ url_for('static', filename='assets/nbyula_logo.svg') }}"
+                alt="Nybula">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign up for Jobify
+            </h2>
+        </div>
+
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-6" method="POST">
+                <div>
+                    <label for="name" class="block text-sm font-medium leading-6 text-gray-900">Full Name</label>
+                    <div class="mt-2">
+                        <input id="name" name="name" type="text" required
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-4"
+                            pattern="[a-zA-Z ]{2,50}">
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label for="user-type" class="block text-sm font-medium leading-6 text-gray-900 my-3">I am</label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" class="form-radio" name="user-type" value="terraformer">
+                        <span class="ml-2 text-sm font-normal leading-6 text-gray-900">Terraformer</span>
+                    </label>
+                    <label class="inline-flex items-center ml-6">
+                        <input type="radio" class="form-radio" name="user-type" value="applicant">
+                        <span class="ml-2 text-sm font-normal leading-6 text-gray-900">Applicant</span>
+                    </label>
+                </div>
+
+
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                    <div class="mt-2">
+                        <input id="email" name="email" type="email" autocomplete="email" required
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-4">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                    </div>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" autocomplete="current-password" required
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-4"
+                            pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+                    </div>
+                </div>
+
+                <div class="bg-blue-100 border-t-4 border-blue-500 rounded-b px-4 py-3 shadow-md" role="alert">
+                    <div class="flex">
+                        <div class="py-1">
+                            <svg class="fill-current h-6 w-6 text-blue-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20">
+                                <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm0-2a6 6 0 110-12 6 6 0 010 12z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-bold">Password must be</p>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>At least 8 characters long</li>
+                                <li>Contains at least one uppercase letter</li>
+                                <li>Contains at least one lowercase letter</li>
+                                <li>Contains at least one digit</li>
+                                <li>Contains at least one special character from @$!%*#?&</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div>
+                    <button type="submit"
+                        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
+                        up</button>
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm text-gray-500">
+                Already a member?
+                <a href="/login" class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Login to
+                    Jobify</a>
+            </p>
+        </div>
+    </div>
+
+    <footer class="rounded-lg shadow my-8 mx-10 bg-slate-100">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+            <span class="text-sm sm:text-center">© 2023 <a href="https://nbyula.com/"
+                    class="hover:underline">Nbyula™</a>. All Rights Reserved.
+            </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0">
+                <li>
+                    <a href="https://nbyula.com/about-us" class="mr-4 hover:underline md:mr-6 ">About</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/privacy-policy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/terms" class="mr-4 hover:underline md:mr-6">Terms of Use</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/contact-us" class="hover:underline">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
