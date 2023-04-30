@@ -8,7 +8,16 @@ import secrets
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "nbyula nithin"
 database_name = "jobify"
-mongo_uri = os.getenv("MONGO_URI")
+
+# loading env data
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except Exception as err:
+    print(err)
+
+mongo_uri = os.environ.get("MONGO_URI")
 
 
 @app.route("/")
@@ -190,5 +199,10 @@ def listings_all():
         return []
 
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return redirect(url_for("home"))
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
