@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobify</title>
+
+    <link rel="icon" type="image/png" href="static\assets\nbyula_logo.svg">
+    <script src="https://cdn.tailwindcss.com/"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+
+    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.10.2.js">
+    </script>
+    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
+</head>
+
+<body>
+    <nav class="flex py-5 px-10 justify-between">
+        <div class="flex gap-10">
+            <a href="/">
+                <img src="{{ url_for('static', filename='assets/name_logo.png') }}" alt="Nbyula Logo" class="w-28">
+            </a>
+
+            <div class="md:flex gap-5 hidden">
+                <a href="https://nbyula.com/"
+                    class="my-auto font-semibold hover:bg-slate-100 h-full flex flex-col justify-center px-4 rounded-md"
+                    target="_blank" rel="noopener">Main
+                    Website</a>
+                <a href="https://nbyula.com/about-us"
+                    class="my-auto font-semibold hover:bg-slate-100 h-full flex flex-col justify-center px-4 rounded-md"
+                    target="_blank" rel="noopener">About
+                    Us</a>
+            </div>
+
+        </div>
+
+        <a href="/logout"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded h-fit my-auto">
+            Logout
+        </a>
+    </nav>
+
+    <div class="flex justify-center">
+        <a href="/listings_admin/add"
+            class="flex w-fit justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add
+            a Job +</a>
+    </div>
+    <div class="flex flex-wrap gap-4 p-4 mx-10">
+        <script>
+            // Fetch data from the given URL
+            fetch("/listings/all")
+                .then((response) => response.json())
+                .then((data) => {
+                    // Loop through the data and create a card for each listing
+                    data.forEach((listing) => {
+                        // Calculate the time left for the deadline
+                        const now = new Date();
+                        const deadline = new Date(listing.deadline);
+                        const diff = Math.floor((deadline - now) / (1000 * 60 * 60 * 24));
+
+                        // Determine the background color based on the time left
+                        let bgColor;
+                        if (diff > 21) {
+                            bgColor = "bg-green-200";
+                        } else if (diff > 14) {
+                            bgColor = "bg-yellow-200";
+                        } else {
+                            bgColor = "bg-red-200";
+                        }
+
+                        // Create the HTML for the card
+                        const card = `
+                  <div class="w-full ${bgColor} p-4 rounded-lg shadow-md">
+                    <h2 class="text-lg font-bold">${listing.title}</h2>
+                    <p class="text-gray-500">${listing.location}</p>
+                    <p class="text-gray-500">Deadline: ${listing.deadline}</p>
+                    <p class="text-gray-500">Contact: ${listing.email} | +91 ${listing.phone}</p>
+                    <p class="text-gray-500">Candidates: ${listing.interested}</p>
+                  </div>
+                `;
+
+                        // Append the card to the container
+                        document.querySelector(".flex-wrap").innerHTML += card;
+                    });
+                });
+        </script>
+    </div>
+
+    <footer class="rounded-lg shadow my-8 mx-10 bg-slate-100">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+            <span class="text-sm sm:text-center">© 2023 <a href="https://nbyula.com/"
+                    class="hover:underline">Nbyula™</a>. All Rights Reserved.
+            </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium sm:mt-0">
+                <li>
+                    <a href="https://nbyula.com/about-us" class="mr-4 hover:underline md:mr-6 ">About</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/privacy-policy" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/terms" class="mr-4 hover:underline md:mr-6">Terms of Use</a>
+                </li>
+                <li>
+                    <a href="https://nbyula.com/contact-us" class="hover:underline">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+</body>
+
+</html>
