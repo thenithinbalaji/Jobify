@@ -102,12 +102,24 @@
                             bgColor = "bg-red-200";
                         }
 
+                        const dateObj = new Date(listing.deadline);
+                        const options = {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                            hour12: false,
+                            timeZone: "UTC"
+                        };
+                        const formattedDate = new Intl.DateTimeFormat("en-US", options).format(dateObj);
+
                         // Create the HTML for the card
                         const card = `
                   <div class="w-full ${bgColor} p-4 rounded-lg shadow-md">
                     <h2 class="text-lg font-bold">${listing.title}</h2>
                     <p class="text-gray-500">${listing.location}</p>
-                    <p class="text-gray-500">Deadline: ${listing.deadline}</p>
+                    <p class="text-gray-500">Deadline: ${formattedDate}</p>
                     <p class="text-gray-500">Contact: ${listing.email} | +91 ${listing.phone}</p>
                     <a href="id/${listing.id}"
                     class="flex w-fit justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-3">Interested</a>
